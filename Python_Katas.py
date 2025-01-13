@@ -65,7 +65,7 @@ def calcular_media(lista_numeros, nota_aprobado=5):
         return media, "suspenso"
 
 numeros = [ 7, 5, 8, 4, 10, 9]
-print(f'La media y el estado son: {calcular_media(numeros, 5)}')
+print(f'La media y el estado son: {calcular_media(numeros)}')
 
 
 ## 6. Escribe una función que calcule el factorial de un número de manera recursiva.
@@ -82,11 +82,10 @@ print(f'El factorial de {numero} es: {factorial(numero)}')
 
 ## 7. Genera una función que convierta una lista de tuplas a una lista de strings. Usa la función map()
 
-def tuplas_a_strings(lista_tuplas):
-    return list(map(lambda tupla: str(tupla), lista_tuplas))
-
 tuplas = [(1, 2), (3, 4), (5, 6)]
-print(tuplas_a_strings(tuplas))
+resultado = list(map(lambda t: f"{t[0]}, {t[1]}", tuplas))
+
+print(resultado)
 
 
 ## 8. Escribe un programa que pida al usuario dos números e intente dividirlos. Si el usuario ingresa un valor 
@@ -143,26 +142,23 @@ print(mascotas(animales))
 # lanza una excepción personalizada y maneja el error adecuadamente.
 
 def calcular_promedio(numeros):
-   
-    if len(numeros) == 0:
-        print('Error: La lista está vacía. No se puede calcular el promedio.')
-        return None  
     
-    # Calcular el promedio
-    promedio = sum(numeros) / len(numeros)
-    return promedio
+        if len(numeros) == 0:
+            print('Error: La lista está vacía. No se puede calcular el promedio.')
+            return 
+        
+        # Calcular el promedio
+        promedio = sum(numeros) / len(numeros)
+        print(f'El promedio es: {promedio}')
 
 lista = [7, 22, 94, 48, 12] 
 promedio = calcular_promedio(lista)
-
-if promedio is not None: 
-    print(f'El promedio es: {promedio}')
 
 
 ## 11. Escribe un programa que pida al usuario que introduzca su edad. Si el usuario ingresa un valor no numérico
 #  o un valor fuera del rango esperado (por ejemplo, menor que 0 o mayor que 120), maneja las excepciones adecuadamente.
 
-def Anotar_edad():
+def anotar_edad():
     # Pedir al usuario que introduzca su edad
     edad = input('Introduce tu edad: ')
 
@@ -179,7 +175,7 @@ def Anotar_edad():
     else:
         print(f'Edad válida: {edad} años.')
 
-Anotar_edad()
+anotar_edad()
 
 
 ## 12. Genera una función que al recibir una frase devuelva una lista con la longitud de cada palabra. Usa la función map()
@@ -212,26 +208,16 @@ print(lista_tuplas(conjunto))
 
 ## 14. Crea una función que retorne las palabras de una lista de palabras que comience con una letra en especifico. Usa la función filter()
 
-def filtro_palabras(palabras, letra):
-  
-    palabras_filtradas = list(filter(lambda palabra: palabra.lower().startswith(letra.lower()), palabras))
-    
-    return (palabras_filtradas)
-
 lista_palabras = ['fútbol', 'tenis', 'golf', 'badminton', 'baloncesto', 'voleyball']
 letra_especifica = 'b'
 
-print(filtro_palabras(lista_palabras, letra_especifica))
+print(list(filter(lambda palabra: palabra.lower().startswith(letra_especifica.lower()), lista_palabras)))
 
 
 ## 15. Crea una función lambda que sume 3 a cada número de una lista dada.
 
-def sumar_tres(lista):
-   
-    return list(map(lambda x: x + 3, lista))
-
 lista_numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-print(sumar_tres(lista_numeros))
+print(list(map(lambda x: x + 3, lista_numeros)))
 
 
 ## 16. Escribe una función que tome una cadena de texto y un número entero n como parámetros y devuelva una lista 
@@ -255,85 +241,69 @@ print(palabras_largas(cadena_texto, numero))
 
 from functools import reduce
 
-def lista_digitos(digitos):
-    
-    numero = reduce(lambda x, y: x * 10 + y, digitos)
-    return numero
-
-lista_numeros = [5, 7, 2, 8, 0]
-print(lista_digitos(lista_numeros))
+lista_digitos = [5, 7, 2, 8, 0]
+numero = reduce(lambda x, y: x * 10 + y, lista_digitos)
+print(numero)
 
 
 ## 18. Escribe un programa en Python que cree una lista de diccionarios que contenga información de estudiantes 
 # (nombre, edad, calificación) y use la función filter para extraer a los estudiantes con una calificación mayor
 # o igual a 90. Usa la función filter()
 
-def estudiantes_aprobados(estudiantes):
- 
-    aprobados = list(filter(lambda estudiante: estudiante['calificacion'] >= 90, estudiantes))
-    return (aprobados)
-
 estudiantes = [ {'nombre': 'Jorge', 'edad': 24, 'calificacion': 85},
                 {'nombre': 'Anabel', 'edad': 22, 'calificacion': 87},
                 {'nombre': 'Carlos', 'edad': 20, 'calificacion': 92},
                 {'nombre': 'Mercedes', 'edad': 23, 'calificacion': 80},
                 {'nombre': 'Isabel', 'edad': 21, 'calificacion': 93}]
 
-print(estudiantes_aprobados(estudiantes))
+aprobados = list(filter(lambda estudiante: estudiante['calificacion'] >= 90, estudiantes))
+
+print("Estudiantes con calificación mayor o igual a 90:")
+for estudiante in aprobados:
+    print(estudiante)
 
 
 ## 19. Crea una función lambda que filtre los números impares de una lista dada.
 
-def impares(lista):
-  
-    return list(filter(lambda x: x % 2 != 0, lista))
+lista_numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+impares = list(filter(lambda x: x % 2 != 0, lista_numeros))
 
-lista_numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-print(impares(lista_numeros))
+print(impares)
 
 
 ## 20. Para una lista con elementos tipo integer y string obtén una nueva lista sólo con los valores int. Usa la función filter()
 
-def valores_enteros(lista):
-   
-    return list(filter(lambda x: isinstance(x, int), lista))
-
-elementos = [1, 'perro', 14, 235, 'leopardo', 77]
-print(valores_enteros(elementos))
+lista = [1, 'perro', 14, 235, 'leopardo', 77]
+print (list(filter(lambda x: isinstance(x, int), lista)))
 
 
 ## 21. Escribe un programa en Python que cree una lista de diccionarios que contenga información de estudiantes 
 # (nombre, edad, calificación) y use la función filter para extraer a los estudiantes con una calificación mayor
 # o igual a 90. Usa la función filter()
 
-def estudiantes_aprobados(estudiantes):
- 
-    aprobados = list(filter(lambda estudiante: estudiante['calificacion'] >= 90, estudiantes))
-    return (aprobados)
-
 estudiantes = [ {'nombre': 'Jorge', 'edad': 24, 'calificacion': 85},
                 {'nombre': 'Anabel', 'edad': 22, 'calificacion': 87},
                 {'nombre': 'Carlos', 'edad': 20, 'calificacion': 92},
                 {'nombre': 'Mercedes', 'edad': 23, 'calificacion': 80},
                 {'nombre': 'Isabel', 'edad': 21, 'calificacion': 93}]
 
-print(estudiantes_aprobados(estudiantes))
+aprobados = list(filter(lambda estudiante: estudiante['calificacion'] >= 90, estudiantes))
+
+print("Estudiantes con calificación mayor o igual a 90:")
+for estudiante in aprobados:
+    print(estudiante)
 
 
 ## 22. Crea una función que calcule el cubo de un número dado mediante una función lambda.
 
-def calcular_cubo(x):
-  
-    cubo = lambda x: x ** 3
-    return cubo(x)
+def calcular_cubo(numero):
+    return (lambda x: x**3)(numero)
 
 numero = 5
-print (calcular_cubo(numero))
+print(calcular_cubo(numero))
 
 
 ## 23. Dada una lista numérica, obtén el producto total de los valores de dicha lista. Usa la función reduce() 
-
-from functools import reduce
 
 def producto_total(lista):
 
@@ -345,8 +315,6 @@ print(producto_total(numeros))
 
 ## 24. Concatena una lista de palabras. Usa la función reduce()
 
-from functools import reduce
-
 def concatenar_palabras(lista):
     
     return reduce(lambda x, y: x + y, lista)
@@ -355,8 +323,6 @@ palabras = ['Solución', ' ', 'katas',' ', 'Python']
 print(concatenar_palabras(palabras))
 
 ## 25. Calcula la diferencia total en los valores de una lista. Usa la función reduce().
-
-from functools import reduce
 
 def diferencia_total(lista):
 
@@ -377,8 +343,7 @@ print(numero_caracteres(cadena_texto))
 
 ## 27. Crea una función lambda que calcule el resto de la división entre dos números dados.
 
-def resto_division (x, y):
-    return (lambda a, b: a % b)(x, y)
+resto_division = lambda x, y: x % y
 
 numero1 = 27
 numero2 = 5
@@ -437,12 +402,7 @@ def anagramas(palabra1, palabra2):
 
 palabra1 = "Roma"
 palabra2 = "Amor"
-
-if anagramas(palabra1, palabra2):
-  print("Las palabras son anagramas")
-  
-else:
-  print("Las palabras no son anagramas")
+print(anagramas(palabra1, palabra2))
 
 
 ## 32. Crea una función que solicite al usuario ingresar una lista de nombres y luego solicite un nombre para buscar
@@ -451,7 +411,7 @@ else:
 
 def buscar_nombre():
 
-  nombres = input("Ingrese una lista de nombres: ").split(',')
+  nombres = input("Ingrese una lista de nombres separados por comas y sin espacios: ").split(',')
   nombre_a_buscar = input("Ingrese el nombre a buscar: ")
 
   if nombre_a_buscar in nombres:
